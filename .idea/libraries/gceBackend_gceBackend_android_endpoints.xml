@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="gceBackend.gceBackend-android-endpoints">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/gceBackend/build/libs/gceBackend-android-endpoints.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
