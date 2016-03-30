@@ -13,6 +13,10 @@ import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
 
+/**
+ * Main Activity for FREE version
+ * based on https://github.com/udacity/ud867/tree/master/FinalProject
+ */
 public class MainActivity extends ActionBarActivity {
 
     InterstitialAd mInterstitialAd;
@@ -25,7 +29,6 @@ public class MainActivity extends ActionBarActivity {
 
         spinner = (ProgressBar)findViewById(R.id.progressBar1);
         spinner.setVisibility(View.GONE);
-
 
         mInterstitialAd = new InterstitialAd(this);
         mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");

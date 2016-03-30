@@ -7,7 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 /**
- * A placeholder fragment containing a simple view.
+ * Main Activity Fragment for PAID version
+ * based on https://github.com/udacity/ud867/tree/master/FinalProject
  */
 public class MainActivityFragment extends Fragment {
 

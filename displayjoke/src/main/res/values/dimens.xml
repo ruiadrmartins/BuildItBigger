@@ -6,4 +6,5 @@
 
     <!-- Joke text sizes -->
     <dimen name="jokeSizeHuge">44sp</dimen>
+    <dimen name="jokeSizeMedium">32sp</dimen>
 </resources>

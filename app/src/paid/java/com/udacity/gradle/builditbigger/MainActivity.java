@@ -9,6 +9,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 
+/**
+ * Main Activity for PAID version
+ * based on https://github.com/udacity/ud867/tree/master/FinalProject
+ */
 public class MainActivity extends ActionBarActivity {
 
     ProgressBar spinner;

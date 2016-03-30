@@ -10,7 +10,8 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 
 /**
- * A placeholder fragment containing a simple view.
+ * Main Activity Fragment for FREE version
+ * based on https://github.com/udacity/ud867/tree/master/FinalProject
  */
 public class MainActivityFragment extends Fragment {
 
@@ -22,6 +23,7 @@ public class MainActivityFragment extends Fragment {
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_main, container, false);
 
+        // Ads for paid version
         AdView mAdView = (AdView) root.findViewById(R.id.adView);
         // Create an ad request. Check logcat output for the hashed device ID to
         // get test ads on a physical device. e.g.

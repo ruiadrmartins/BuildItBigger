@@ -17,6 +17,7 @@ public class JokeMainActivity extends AppCompatActivity {
             Bundle bundle = new Bundle();
             Intent intent = getIntent();
 
+            // Get joke from calling activity and send it to fragment
             String joke = intent.getStringExtra(JOKE_LABEL);
             bundle.putString(JOKE_LABEL, joke);
 

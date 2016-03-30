@@ -18,7 +18,11 @@ import pt.ruiadrmartins.displayjoke.JokeMainActivity;
 import pt.ruimartins.gcebackend.myApi.MyApi;
 
 /**
- * Created by ruimartins on 17-03-2016.
+ * Task to communicate with GCE Server
+ * Based on the tutorial from
+ * https://github.com/GoogleCloudPlatform/gradle-appengine-templates/tree/master/HelloEndpoints
+ *
+ * GCE Server address and location is configured on the gradle.properties file
  */
 class EndpointsAsyncTask extends AsyncTask<Pair<Context,ProgressBar>, Void, String> {
     private static MyApi myApiService = null;
@@ -30,28 +34,21 @@ class EndpointsAsyncTask extends AsyncTask<Pair<Context,ProgressBar>, Void, Stri
         if(myApiService == null) {  // Only do this once
             MyApi.Builder builder;
 
+            builder = new MyApi.Builder(AndroidHttp.newCompatibleTransport(),
+                    new AndroidJsonFactory(), null)
+                    .setRootUrl(BuildConfig.GCE_ADDRESS);
+
             // if GCEServer is local
             if(BuildConfig.localAddr) {
-                builder = new MyApi.Builder(AndroidHttp.newCompatibleTransport(),
-                        new AndroidJsonFactory(), null)
-                        // options for running against local devappserver
-                        // - 10.0.2.2 is localhost's IP address in Android emulator
-                        // - turn off compression when running against local devappserver
-                        .setRootUrl("http://10.0.2.2:8080/_ah/api/")
-                        .setGoogleClientRequestInitializer(new GoogleClientRequestInitializer() {
-                            @Override
-                            public void initialize(AbstractGoogleClientRequest<?> abstractGoogleClientRequest) throws IOException {
-                                abstractGoogleClientRequest.setDisableGZipContent(true);
-                            }
-                        });
-
-                // end options for devappserver
-            } else {
-                // If GCEServer is online
-                builder = new MyApi.Builder(AndroidHttp.newCompatibleTransport(),
-                        new AndroidJsonFactory(), null)
-                        .setRootUrl(BuildConfig.GCE_ADDRESS);
+                builder.setGoogleClientRequestInitializer(
+                    new GoogleClientRequestInitializer() {
+                        @Override
+                        public void initialize(AbstractGoogleClientRequest<?> abstractGoogleClientRequest) throws IOException {
+                            abstractGoogleClientRequest.setDisableGZipContent(true);
+                        }
+                });
             }
+
             myApiService = builder.build();
         }
 
@@ -59,7 +56,6 @@ class EndpointsAsyncTask extends AsyncTask<Pair<Context,ProgressBar>, Void, Stri
         spinner = params[0].second;
 
         try {
-            //return myApiService.sayHi(name).execute().getData();
             return myApiService.getRandomJoke().execute().getData();
         } catch (IOException e) {
             return e.getMessage();
@@ -68,7 +64,6 @@ class EndpointsAsyncTask extends AsyncTask<Pair<Context,ProgressBar>, Void, Stri
 
     @Override
     protected void onPostExecute(String joke) {
-        //Toast.makeText(context, result, Toast.LENGTH_LONG).show();
         if(context!=null) {
             Intent intent = new Intent(context, JokeMainActivity.class);
             intent.putExtra(JokeMainActivity.JOKE_LABEL, joke);
